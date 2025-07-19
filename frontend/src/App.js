@@ -1,8 +1,9 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './Components/Navbar/Navbar.js';
-import HealthTab from './Components/HealthTab/HealthTab.js';
-import TravelingTab from './Components/TravelTab/TravelTab.js';
+import Navbar from './Components/Navbar.js';
+import HealthTab from './Pages/HealthTab.js';
+import TravelTab from './Pages/TravelTab.js';
+import Home from './Pages/Home.js'
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <Router>
         <Navbar />
           <Routes>
+            <Route path="/Home" element={<Home />}/>
             <Route path="/HealthTab" element={<HealthTab />} />
-            <Route path="/TravelTab" element={<TravelingTab />} />
+            <Route path="/TravelTab" element={<TravelTab />} />
           </Routes>
       </Router>
     </div>
