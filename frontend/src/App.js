@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar.js";
 import TravelTab from "./Pages/TravelTab.js";
 import Home from "./Pages/Home.js";
-import HealthTab from "./Components/HealthTab/HealthTab.js";
+import HealthTab from "./Pages/HealthTab.js";
 
 function App() {
   return (

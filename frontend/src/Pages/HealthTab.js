@@ -1,5 +1,5 @@
-import { apps, books, products, styles } from "./HealthConstants";
-import { CategoryCard } from "./CategoryCard";
+import { apps, books, products, styles } from "../Components/HealthTab/HealthConstants";
+import { CategoryCard } from "../Components/HealthTab/CategoryCard";
 
 const HealthTab = () => {
   return (
