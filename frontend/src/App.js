@@ -4,6 +4,7 @@ import Navbar from "./Components/Navbar.js";
 import TravelTab from "./Pages/TravelTab.js";
 import Home from "./Pages/Home.js";
 import HealthTab from "./Pages/HealthTab.js";
+import ArticleForm from "./Components/ArticleForm.js"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/HealthTab" element={<HealthTab />} />
           <Route path="/TravelTab" element={<TravelTab />} />
         </Routes>
+        <ArticleForm />
       </Router>
     </div>
   );
