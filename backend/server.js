@@ -1,6 +1,7 @@
 import express from "express";
 import connectDB from "./connection.js";
 import articlesRouter from "./routes/articleRoutes.js";
+import cors from "cors";
 
 // initialize app and set middleware
 const app = express();
@@ -8,6 +9,7 @@ const app = express();
 // connect to MongoDB
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
 
 // Routes

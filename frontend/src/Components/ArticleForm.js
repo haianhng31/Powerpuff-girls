@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 const ArticleForm = () => {
     const [formData, setFormData] = useState({
@@ -8,10 +9,11 @@ const ArticleForm = () => {
         ranking: "",
         description: "",
         price: "",
-        creator: "",
-        dateCreated: "",
+        creatorName: "",
+        date: "",
+        imageUrl: "",
         link: "",
-        image: null,
+        locationId: "",
     });
     
     const handleChange = (e) => {
@@ -22,10 +24,28 @@ const ArticleForm = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Submitted:", formData);
-        // add submit logic (e.g. POST request)
+        try {
+            const res = await axios.post("http://localhost:5000/api/articles", formData);
+            console.log("Article created:", res.data);
+            // Optionally reset form
+            setFormData({
+                title: "",
+                type: "",
+                category: "",
+                ranking: "",
+                description: "",
+                price: "",
+                creatorName: "",
+                date: "",
+                imageUrl: "",
+                link: "",
+                locationId: "",
+            });
+        } catch (err) {
+            console.error("Error submitting form:", err.response?.data || err.message);
+        }
     };
 
     return (
@@ -35,9 +55,9 @@ const ArticleForm = () => {
                     <label className="block font-medium">Name</label>
                     <input
                         type="text"
-                        name="name"
+                        name="title"
                         className="w-full border rounded-lg px-4 py-2"
-                        value={formData.name}
+                        value={formData.title}
                         onChange={handleChange}
                         required
                     />
@@ -116,9 +136,9 @@ const ArticleForm = () => {
                     <label className="block font-medium">Creator Name</label>
                     <input
                         type="text"
-                        name="creator"
+                        name="creatorName"
                         className="w-full border rounded-lg px-4 py-2"
-                        value={formData.creator}
+                        value={formData.creatorName}
                         onChange={handleChange}
                         required
                     />
@@ -127,9 +147,9 @@ const ArticleForm = () => {
                     <label className="block font-medium">Date Created</label>
                     <input
                         type="date"
-                        name="dateCreated"
+                        name="date"
                         className="w-full border rounded-lg px-4 py-2"
-                        value={formData.dateCreated}
+                        value={formData.date}
                         onChange={handleChange}
                         required
                     />
@@ -148,9 +168,18 @@ const ArticleForm = () => {
                     <label className="block font-medium">Optional Image</label>
                     <input
                         type="file"
-                        name="image"
-                        accept="image/*"
+                        name="imageURL"
                         className="w-full"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label className="block font-medium">Optional Location</label>
+                    <input
+                        type="text"
+                        name="locationID"
+                        className="w-full border rounded-lg px-4 py-2"
+                        value={formData.locationId}
                         onChange={handleChange}
                     />
                 </div>
