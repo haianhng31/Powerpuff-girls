@@ -5,7 +5,7 @@ import {
   getArticleById,
   updateArticle,
   deleteArticle,
-} from "../controllers/ArticleControllers.js";
+} from "../controllers/articleControllers.js";
 
 const articlesRouter = express.Router();
 
