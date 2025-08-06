@@ -5,9 +5,10 @@ import cors from "cors";
 
 // initialize app and set middleware
 const app = express();
+app.use(cors());
 
 // connect to MongoDB
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
