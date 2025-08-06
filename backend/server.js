@@ -1,12 +1,14 @@
 import express from "express";
 import connectDB from "./connection.js";
 import articlesRouter from "./routes/articleRoutes.js";
+import cors from "cors";
 
 // initialize app and set middleware
 const app = express();
+app.use(cors());
 
 // connect to MongoDB
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 
