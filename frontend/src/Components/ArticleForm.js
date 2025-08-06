@@ -27,7 +27,7 @@ const ArticleForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5000/api/articles", formData);
+            const res = await axios.post("http://localhost:8000/api/articles", formData);
             console.log("Article created:", res.data);
             // Optionally reset form
             setFormData({
