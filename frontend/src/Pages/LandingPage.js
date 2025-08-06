@@ -1,4 +1,6 @@
 import React from "react";
+import howitstartedimage from "../Images/howitstarted.png";
+import aboutUsImage from "../Images/aboutusscreenshot.png";
 
 function LandingPage() {
   return (
@@ -12,7 +14,7 @@ function LandingPage() {
           and more, all in one place!
         </p>
         <img
-          src="https://via.placeholder.com/800x400"
+          src={aboutUsImage}
           alt="About Us"
           className="rounded-lg shadow-lg w-full object-cover"
         />
@@ -28,7 +30,7 @@ function LandingPage() {
            — all designed to help women navigate the world with confidence.
         </p>
         <img
-          src="https://via.placeholder.com/800x400"
+          src={howitstartedimage}
           alt="How It Started"
           className="rounded-lg shadow-lg w-full object-cover"
         />
@@ -44,7 +46,6 @@ function LandingPage() {
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
             >
               <img
-                src="https://via.placeholder.com/400x300"
                 alt="Article"
                 className="w-full h-48 object-cover"
               />
