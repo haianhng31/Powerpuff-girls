@@ -13,7 +13,7 @@ const articleSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   creatorName: { type: String, required: true },
   date: { type: Date, required: true },
-  imageUrl: { type: String, required: true },
+  imageUrl: { type: String, default: null },
   link: { type: String, default: null },
   locationId: { type: String, default: null },
 });

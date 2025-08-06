@@ -27,7 +27,7 @@ const ArticleForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5000/api/articles", formData);
+            const res = await axios.post("http://localhost:8000/api/articles", formData);
             console.log("Article created:", res.data);
             // Optionally reset form
             setFormData({
@@ -165,11 +165,12 @@ const ArticleForm = () => {
                     />
                 </div>
                 <div>
-                    <label className="block font-medium">Optional Image</label>
+                    <label className="block font-medium">Optional Image URL</label>
                     <input
-                        type="file"
-                        name="imageURL"
-                        className="w-full"
+                        type="url"
+                        name="imageUrl"
+                        className="w-full border rounded-lg px-4 py-2"
+                        value={formData.imageUrl}
                         onChange={handleChange}
                     />
                 </div>
@@ -177,7 +178,7 @@ const ArticleForm = () => {
                     <label className="block font-medium">Optional Location</label>
                     <input
                         type="text"
-                        name="locationID"
+                        name="locationId"
                         className="w-full border rounded-lg px-4 py-2"
                         value={formData.locationId}
                         onChange={handleChange}
@@ -185,7 +186,7 @@ const ArticleForm = () => {
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
+                    className="w-full bg-pink-600 text-white py-2 px-4 rounded-lg hover:bg-pink-700"
                 >
                     Submit
                 </button>
