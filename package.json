@@ -1,0 +1,25 @@
+{
+  "name": "powerpuff-girls",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "develop": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haianhng31/Powerpuff-girls.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haianhng31/Powerpuff-girls/issues"
+  },
+  "homepage": "https://github.com/haianhng31/Powerpuff-girls#readme",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}
