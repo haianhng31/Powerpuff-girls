@@ -75,7 +75,7 @@ const ArticleForm = () => {
                         <option value="book">Book</option>
                         <option value="product">Product</option>
                         <option value="app">App</option>
-                        <option value="place">Place</option>
+                        <option value="blog">Blog</option>
                     </select>
                 </div>
                 <div>
@@ -171,16 +171,6 @@ const ArticleForm = () => {
                         name="imageUrl"
                         className="w-full border rounded-lg px-4 py-2"
                         value={formData.imageUrl}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label className="block font-medium">Optional Location</label>
-                    <input
-                        type="text"
-                        name="locationId"
-                        className="w-full border rounded-lg px-4 py-2"
-                        value={formData.locationId}
                         onChange={handleChange}
                     />
                 </div>
