@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import howitstartedimage from "../Images/howitstarted.png";
 import aboutUsImage from "../Images/aboutusscreenshot.png";
+import ArticleForm from "../Components/Article/ArticleForm";
 
 function LandingPage() {
   const [items, setItems] = useState([]);
@@ -11,7 +12,6 @@ function LandingPage() {
     let aborted = false;
     (async () => {
       try {
-        // MOST RECENT 3 — direct call to your backend (no proxy needed)
         const res = await fetch("http://localhost:8000/api/articles?sort=recent&limit=3");
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
@@ -27,8 +27,6 @@ function LandingPage() {
 
   return (
     <div className="bg-[#FFF5F8] min-h-screen text-gray-800">
-
-      {/* About Us Section */}
       <section className="max-w-5xl mx-auto px-6 py-12">
         <h1 className="text-4xl font-bold text-pink-600 mb-4">About Us</h1>
         <p className="text-lg mb-8">
@@ -38,7 +36,6 @@ function LandingPage() {
         <img src={aboutUsImage} alt="About Us" className="rounded-lg shadow-lg w-full object-cover" />
       </section>
 
-      {/* How It Started Section */}
       <section className="max-w-5xl mx-auto px-6 py-12">
         <h2 className="text-3xl font-semibold text-pink-600 mb-4">How It Started</h2>
         <p className="text-lg mb-8">
@@ -49,17 +46,13 @@ function LandingPage() {
         <img src={howitstartedimage} alt="How It Started" className="rounded-lg shadow-lg w-full object-cover" />
       </section>
 
-      {/* Featured Articles: Most Recent 3 */}
       <section className="max-w-5xl mx-auto px-6 pb-16">
         <h2 className="text-3xl font-semibold text-pink-600 mb-6">Featured Articles</h2>
-
-        {/* loading / error / empty states */}
         {loading && <div>Loading featured…</div>}
         {!loading && err && <div className="text-red-600">Couldn’t load featured: {err}</div>}
         {!loading && !err && items.length === 0 && (
           <div className="rounded-xl border p-4 text-sm">No articles yet.</div>
         )}
-
         {!loading && !err && items.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {items.map((a) => (
@@ -78,7 +71,7 @@ function LandingPage() {
                     {a.description?.slice(0, 140)}
                     {a.description?.length > 140 ? "…" : ""}
                   </p>
-                  {a.link ? (
+                  {a.link && (
                     <a
                       href={a.link}
                       target="_blank"
@@ -87,7 +80,7 @@ function LandingPage() {
                     >
                       Read more →
                     </a>
-                  ) : null}
+                  )}
                 </div>
               </div>
             ))}
@@ -95,10 +88,16 @@ function LandingPage() {
         )}
       </section>
 
+      <section className="max-w-5xl mx-auto px-6 pb-20">
+        <h2 className="text-3xl font-semibold text-pink-600 mb-4">
+          Have a recommendation? Put it here for others to discover it!
+        </h2>
+        <div className="bg-white rounded-xl shadow p-4 sm:p-6">
+          <ArticleForm />
+        </div>
+      </section>
     </div>
   );
 }
 
 export default LandingPage;
-
-
