@@ -26,7 +26,7 @@ function LandingPage() {
   }, []);
 
   return (
-    <div className="bg-[#FFF5F8] min-h-screen text-gray-800">
+    <div className="bg-white min-h-screen text-gray-800">
 
       {/* About Us Section */}
       <section className="max-w-5xl mx-auto px-6 py-12">
