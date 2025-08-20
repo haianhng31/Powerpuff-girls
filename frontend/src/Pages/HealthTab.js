@@ -1,7 +1,19 @@
-import { apps, books, products, styles } from "../Components/HealthTab/HealthConstants";
+import React, { useState } from "react";
+import {
+  apps,
+  books,
+  products,
+  styles,
+} from "../Components/HealthTab/HealthConstants";
 import { CategoryCard } from "../Components/HealthTab/CategoryCard";
+import { ProviderSearchModal } from "../Components/HealthTab/ProviderSearchModal";
 
 const HealthTab = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div style={styles.container}>
       <div style={styles.maxWidth}>
@@ -84,6 +96,7 @@ const HealthTab = () => {
             </p>
             <button
               style={styles.footerButton}
+              onClick={openModal}
               onMouseEnter={(e) => {
                 e.target.style.transform = "scale(1.05)";
               }}
@@ -96,6 +109,9 @@ const HealthTab = () => {
           </div>
         </div>
       </div>
+
+      {/* Provider Search Modal */}
+      <ProviderSearchModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

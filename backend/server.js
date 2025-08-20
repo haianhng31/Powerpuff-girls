@@ -1,6 +1,7 @@
 import express from "express";
 import connectDB from "./connection.js";
 import articlesRouter from "./routes/articleRoutes.js";
+import providerRouter from "./routes/providerRoutes.js";
 import cors from "cors";
 
 // initialize app and set middleware
@@ -15,6 +16,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/articles", articlesRouter);
+app.use("/api/providers", providerRouter);
 
 // Start server
 const startServer = async () => {
