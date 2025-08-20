@@ -6,13 +6,17 @@ import {
   updateArticle,
   deleteArticle,
 } from "../controllers/articleControllers.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const articlesRouter = express.Router();
 
-articlesRouter.post("/", createArticle);
+// Public reads
 articlesRouter.get("/", getAllArticles);
 articlesRouter.get("/:id", getArticleById);
-articlesRouter.put("/:id", updateArticle);
-articlesRouter.delete("/:id", deleteArticle);
+
+// Protected writes
+articlesRouter.post("/", authMiddleware, createArticle);
+articlesRouter.put("/:id", authMiddleware, updateArticle);
+articlesRouter.delete("/:id", authMiddleware, deleteArticle);
 
 export default articlesRouter;

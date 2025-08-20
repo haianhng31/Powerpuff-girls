@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import howitstartedimage from "../Images/howitstarted.png";
 import aboutUsImage from "../Images/aboutusscreenshot.png";
 import ArticleForm from "../Components/Article/ArticleForm";
+import MembershipPrompt from "../Components/MembershipPrompt";
+import { supabase } from "../lib/supabaseClient";
 
 function LandingPage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
+  const [user, setUser] = useState(null);
+  const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
     let aborted = false;
@@ -27,14 +31,50 @@ function LandingPage() {
     };
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase.auth.getUser();
+      setUser(data?.user ?? null);
+    })();
+
+    const { data: sub } = supabase.auth.onAuthStateChange((_evt, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user) setShowPrompt(false);
+    });
+
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
   return (
     <div className="bg-[#FFF5F8] min-h-screen text-gray-800">
       <section className="max-w-5xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold text-pink-600 mb-4">About Us</h1>
-        <p className="text-lg mb-8">
-          Powerpuff is a website by women for women. You can find articles, travel guides, health advice, and more,
-          all in one place!
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-bold text-pink-600 mb-4">About Us</h1>
+            <p className="text-lg mb-8">
+              Powerpuff is a website by women for women. You can find articles, travel guides, health advice, and more,
+              all in one place!
+            </p>
+          </div>
+          {user ? (
+            <button
+              onClick={async () => {
+                await supabase.auth.signOut();
+                setUser(null);
+              }}
+              className="mt-1 rounded-xl bg-gray-200 px-4 py-2 text-gray-800 hover:bg-gray-300"
+            >
+              Log out
+            </button>
+          ) : (
+            <button
+              onClick={() => setShowPrompt(true)}
+              className="mt-1 rounded-xl bg-pink-600 px-4 py-2 text-white hover:bg-pink-700"
+            >
+              Log in / Sign up
+            </button>
+          )}
+        </div>
         <img src={aboutUsImage} alt="About Us" className="rounded-lg shadow-lg w-full object-cover" />
       </section>
 
@@ -94,12 +134,30 @@ function LandingPage() {
         <h2 className="text-3xl font-semibold text-pink-600 mb-4">
           Have a recommendation? Put it here for others to discover it!
         </h2>
-        <div className="bg-white rounded-xl shadow p-4 sm:p-6">
-          <ArticleForm />
-        </div>
+        {user ? (
+          <div className="bg-white rounded-xl shadow p-4 sm:p-6">
+            <ArticleForm />
+          </div>
+        ) : (
+          <div className="rounded-xl border border-pink-200 bg-white p-6">
+            <p className="text-gray-700">You need to be a member to submit a recommendation.</p>
+            <div className="mt-4">
+              <button
+                onClick={() => setShowPrompt(true)}
+                className="rounded-xl px-4 py-2 font-medium text-white bg-pink-600 hover:bg-pink-700"
+              >
+                Sign up / Log in
+              </button>
+            </div>
+          </div>
+        )}
       </section>
+
+      <MembershipPrompt open={showPrompt} onClose={() => setShowPrompt(false)} />
     </div>
   );
 }
 
 export default LandingPage;
+
+
