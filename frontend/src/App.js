@@ -5,6 +5,7 @@ import TravelTab from "./Pages/TravelTab.js";
 import Home from "./Pages/Home.js";
 import HealthTab from "./Pages/HealthTab.js";
 import LandingPage from "./Pages/LandingPage";
+import AdminDashboard from "./Pages/AdminDashboard"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/Home" element={<Home />} />
           <Route path="/HealthTab" element={<HealthTab />} />
           <Route path="/TravelTab" element={<TravelTab />} />
+          <Route path="/Admin" element={<AdminDashboard />} />
         </Routes>
       </Router>
     </div>

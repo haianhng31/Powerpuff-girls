@@ -15,7 +15,7 @@ export const createArticle = async (req, res) => {
   }
 };
 
-// READ (ALL)
+// READ (APPROVED)
 export const getAllArticles = async (req, res) => {
   try {
     const articles = await Article.find({ approved: true });
@@ -24,6 +24,17 @@ export const getAllArticles = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// READ (ALL)
+export const getAllForAdmin = async (req, res) => {
+  try {
+    const articles = await Article.find();
+    res.json(articles);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 
 // READ (BY ID)
 export const getArticleById = async (req, res) => {
@@ -59,3 +70,19 @@ export const deleteArticle = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// APPROVE
+export const approveArticle = async (req, res) => {
+  try {
+    const updated = await Article.findByIdAndUpdate(
+      req.params.id,
+      { approved: true },
+      { new: true }
+    );
+    if (!updated) return res.status(404).json({ error: "Article not found" });
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
