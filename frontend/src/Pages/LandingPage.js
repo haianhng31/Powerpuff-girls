@@ -62,14 +62,14 @@ function LandingPage() {
                 await supabase.auth.signOut();
                 setUser(null);
               }}
-              className="mt-1 rounded-xl bg-gray-200 px-4 py-2 text-gray-800 hover:bg-gray-300"
+              className="mt-1 rounded-xl bg-gray-200 px-4 py-2 text-gray-800 hover:bg-gray-300 whitespace-nowrap"
             >
               Log out
             </button>
           ) : (
             <button
               onClick={() => setShowPrompt(true)}
-              className="mt-1 rounded-xl bg-pink-600 px-4 py-2 text-white hover:bg-pink-700"
+              className="mt-1 rounded-xl bg-pink-600 px-4 py-2 text-white hover:bg-pink-700 whitespace-nowrap"
             >
               Log in / Sign up
             </button>
