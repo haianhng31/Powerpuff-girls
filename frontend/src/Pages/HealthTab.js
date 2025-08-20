@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   apps,
   books,
@@ -13,6 +13,31 @@ const HealthTab = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/articles");
+        if (!response.ok) throw new Error("Failed to fetch articles");
+        const data = await response.json();
+        setArticles(data);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
+  // Split into categories
+  const apps = articles?.filter((a) => a.type === "app") || [];
+  const books = articles?.filter((a) => a.type === "book") || [];
+  const products = articles?.filter((a) => a.type === "product") || [];
 
   return (
     <div style={styles.container}>
@@ -37,7 +62,7 @@ const HealthTab = () => {
                 <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
                   🏆
                 </span>
-                <span style={styles.statValue}>12</span>
+                <span style={styles.statValue}>{articles.length}</span>
               </div>
               <p style={styles.statLabel}>Highly Rated Resources</p>
             </div>
@@ -62,29 +87,35 @@ const HealthTab = () => {
           </div>
         </div>
 
-        {/* Main Content - Three Columns */}
-        <div style={styles.mainGrid}>
-          <CategoryCard
-            items={apps}
-            icon="📱"
-            title="Top Apps"
-            bgGradient="linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)"
-          />
+        {/* Main Content */}
+        {loading ? (
+          <p style={{ textAlign: "center", margin: "20px 0" }}>
+            Loading resources...
+          </p>
+        ) : (
+          <div style={styles.mainGrid}>
+            <CategoryCard
+              items={apps || []}
+              icon="📱"
+              title="Top Apps"
+              bgGradient="linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)"
+            />
 
-          <CategoryCard
-            items={books}
-            icon="📚"
-            title="Best Books"
-            bgGradient="linear-gradient(135deg, #ec4899 0%, #db2777 100%)"
-          />
+            <CategoryCard
+              items={books || []}
+              icon="📚"
+              title="Best Books"
+              bgGradient="linear-gradient(135deg, #ec4899 0%, #db2777 100%)"
+            />
 
-          <CategoryCard
-            items={products}
-            icon="🛍️"
-            title="Top Products"
-            bgGradient="linear-gradient(135deg, #f43f5e 0%, #e11d48 100%)"
-          />
-        </div>
+            <CategoryCard
+              items={products || []}
+              icon="🛍️"
+              title="Top Products"
+              bgGradient="linear-gradient(135deg, #f43f5e 0%, #e11d48 100%)"
+            />
+          </div>
+        )}
 
         {/* Footer */}
         <div style={styles.footer}>

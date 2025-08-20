@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import connectDB from "./connection.js";
 import articlesRouter from "./routes/articleRoutes.js";

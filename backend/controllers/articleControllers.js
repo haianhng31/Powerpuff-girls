@@ -4,7 +4,10 @@ import Article from "../models/Articles.js";
 // CREATE
 export const createArticle = async (req, res) => {
   try {
-    const article = new Article(req.body);
+    const article = new Article({
+      ...req.body,
+      approved: false,
+    });
     const saved = await article.save();
     res.status(201).json(saved);
   } catch (err) {
@@ -15,7 +18,7 @@ export const createArticle = async (req, res) => {
 // READ (ALL)
 export const getAllArticles = async (req, res) => {
   try {
-    const articles = await Article.find();
+    const articles = await Article.find({ approved: true });
     res.json(articles);
   } catch (err) {
     res.status(500).json({ error: err.message });
