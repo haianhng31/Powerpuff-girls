@@ -4,7 +4,7 @@ import powerpuffLogo from '../Images/powerpuffLogo.png';
 
 const Navbar = () => {
     return (
-    <nav className="bg-white shadow-md px-6 h-16 flex items-center justify-between">
+    <nav className="bg-rose-100 shadow-md px-6 h-16 flex items-center justify-between z-50 relative">
         <div className="text-xl text-gray-800">
             <Link to='/'>
                 <img src={powerpuffLogo} alt="Powerpuff Logo" className="h-20 w-auto"></img>

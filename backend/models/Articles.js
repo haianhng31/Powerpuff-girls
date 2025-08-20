@@ -15,7 +15,7 @@ const articleSchema = new mongoose.Schema({
   date: { type: Date, required: true },
   imageUrl: { type: String, default: null },
   link: { type: String, default: null },
-  locationId: { type: String, default: null },
+  approved: { type: Boolean, default: false },
 });
 
 const Article = mongoose.model("Article", articleSchema);
