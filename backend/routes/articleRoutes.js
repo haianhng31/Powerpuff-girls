@@ -13,14 +13,14 @@ import authMiddleware from "../middleware/authMiddleware.js";
 const articlesRouter = express.Router();
 
 // Public reads
-articlesRouter.get("/", getAllArticles);
 articlesRouter.get("/all", getAllForAdmin);
+articlesRouter.get("/", getAllArticles);
 articlesRouter.get("/:id", getArticleById);
+articlesRouter.patch("/admin/:id", approveArticle);
 
 // Protected writes
 articlesRouter.post("/", authMiddleware, createArticle);
 articlesRouter.put("/:id", authMiddleware, updateArticle);
 articlesRouter.delete("/:id", authMiddleware, deleteArticle);
-articlesRouter.patch("/admin/:id", authMiddleware, approveArticle);
 
 export default articlesRouter;

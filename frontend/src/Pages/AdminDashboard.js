@@ -23,7 +23,7 @@ const AdminDashboard = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.patch(`http://localhost:8000/api/articles/approve/${id}`);
+      await axios.patch(`http://localhost:8000/api/articles/admin/${id}`);
       setUnapprovedArticles(prev => prev.filter(article => article._id !== id));
     } catch (err) {
       console.error("Failed to approve article", err);
