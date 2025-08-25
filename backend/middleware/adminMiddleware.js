@@ -1,4 +1,4 @@
-const ADMIN_EMAIL = "alondralezfra@hotmail.com";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 
 const adminMiddleware = (req, res, next) => {

@@ -22,8 +22,9 @@ export default function MembershipPrompt({ open, onClose }) {
         setStatus("ok");
         setMsg("Check your email to confirm your account.");
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        localStorage.setItem("token", data.session.access_token);
         setStatus("ok");
         setMsg("Logged in!");
         onClose(); // close modal on successful login

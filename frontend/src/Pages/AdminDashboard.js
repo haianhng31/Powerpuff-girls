@@ -9,7 +9,12 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUnapproved = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/articles/all"); // Custom route for admins
+        const token = localStorage.getItem("token");
+        const res = await axios.get("http://localhost:8000/api/articles/all", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const unapproved = res.data.filter(article => article.approved === false);
         setUnapprovedArticles(unapproved);
         setLoading(false);
@@ -23,7 +28,12 @@ const AdminDashboard = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.patch(`http://localhost:8000/api/articles/admin/${id}`);
+      const token = localStorage.getItem("token");
+      await axios.patch(`http://localhost:8000/api/articles/admin/${id}`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setUnapprovedArticles(prev => prev.filter(article => article._id !== id));
     } catch (err) {
       console.error("Failed to approve article", err);

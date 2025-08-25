@@ -11,6 +11,7 @@ function LandingPage() {
   const [err, setErr] = useState("");
   const [user, setUser] = useState(null);
   const [showPrompt, setShowPrompt] = useState(false);
+  const ADMIN_EMAIL = process.env.REACT_APP_ADMIN_EMAIL;
 
   useEffect(() => {
     let aborted = false;
@@ -73,6 +74,14 @@ function LandingPage() {
             >
               Log in / Sign up
             </button>
+          )}
+          {user?.email === ADMIN_EMAIL && (
+            <a
+              href="/Admin"
+              className="mt-1 ml-2 rounded-xl bg-green-600 px-4 py-2 text-white hover:bg-green-700 whitespace-nowrap"
+            >
+              Admin Dashboard
+            </a>
           )}
         </div>
         <img src={aboutUsImage} alt="About Us" className="rounded-lg shadow-lg w-full object-cover" />
@@ -159,5 +168,3 @@ function LandingPage() {
 }
 
 export default LandingPage;
-
-
