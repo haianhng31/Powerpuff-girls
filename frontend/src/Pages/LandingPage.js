@@ -12,12 +12,13 @@ function LandingPage() {
   const [user, setUser] = useState(null);
   const [showPrompt, setShowPrompt] = useState(false);
   const ADMIN_EMAIL = process.env.REACT_APP_ADMIN_EMAIL;
+  const baseurl = process.env.REACT_APP_DEPLOY || "http://localhost:8000"
 
   useEffect(() => {
     let aborted = false;
     (async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/articles?sort=recent&limit=3");
+        const res = await fetch(baseurl+"/api/articles?sort=recent&limit=3");
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         if (!aborted) setItems((Array.isArray(data) ? data : []).slice(0, 3));
