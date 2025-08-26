@@ -12,7 +12,7 @@ function LandingPage() {
   const [user, setUser] = useState(null);
   const [showPrompt, setShowPrompt] = useState(false);
   const ADMIN_EMAIL = process.env.REACT_APP_ADMIN_EMAIL;
-  const baseurl = process.env.REACT_APP_DEPLOY || "http://localhost:8000"
+  const baseurl = process.env.REACT_APP_DEPLOY || "http://localhost:8000";
 
   useEffect(() => {
     let aborted = false;

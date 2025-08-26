@@ -23,6 +23,7 @@ const TravelTab = () => {
     const langCode = (userLang.split("-")[0] || "en").toLowerCase();
     const supportedLangs = ["en", "fr", "es", "de", "ja", "ru", "zh"];
     const chosenLang = supportedLangs.includes(langCode) ? langCode : "en";
+    const baseurl = process.env.REACT_APP_DEPLOY || "http://localhost:8000";
 
 
     const mapTiler = L.tileLayer(
@@ -83,7 +84,7 @@ const TravelTab = () => {
 
     const fetchLocations = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/locations");
+        const response = await fetch(baseurl+"/api/locations");
         const locations = await response.json();
 
         locations.forEach((loc) => {

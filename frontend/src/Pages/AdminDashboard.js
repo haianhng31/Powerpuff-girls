@@ -4,13 +4,14 @@ import axios from "axios";
 const AdminDashboard = () => {
   const [unapprovedArticles, setUnapprovedArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const baseurl = process.env.REACT_APP_DEPLOY || "http://localhost:8000";
 
   // Fetch unapproved articles on load
   useEffect(() => {
     const fetchUnapproved = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:8000/api/articles/all", {
+        const res = await axios.get(baseurl+"/api/articles/all", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

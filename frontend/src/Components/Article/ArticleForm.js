@@ -3,6 +3,7 @@ import axios from "axios";
 import { supabase } from "../../lib/supabaseClient";
 
 const TYPE_OPTIONS = ["book", "product", "app", "place", "blog"];
+const baseurl = process.env.REACT_APP_DEPLOY || "http://localhost:8000";
 
 const ArticleForm = () => {
   const [formData, setFormData] = useState({
@@ -53,7 +54,7 @@ const ArticleForm = () => {
     };
 
     try {
-      await axios.post("http://localhost:8000/api/articles", payload, {
+      await axios.post(baseurl+"/api/articles", payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

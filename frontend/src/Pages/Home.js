@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const baseurl = process.env.REACT_APP_DEPLOY || "http://localhost:8000";
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/articles");
+        const response = await fetch(baseurl+"/api/articles");
         if (!response.ok) throw new Error("Failed to fetch articles");
         const data = await response.json();
 

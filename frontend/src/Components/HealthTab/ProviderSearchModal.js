@@ -11,6 +11,7 @@ export const ProviderSearchModal = ({ isOpen, onClose }) => {
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const baseurl = process.env.REACT_APP_DEPLOY || "http://localhost:8000";
 
   const specialties = [
     { value: "", label: "All Specialties" },
@@ -59,8 +60,8 @@ export const ProviderSearchModal = ({ isOpen, onClose }) => {
       console.log("Making request to backend with params:", params.toString());
 
       // Call our backend API instead of NPPES directly
-      const response = await fetch(
-        `http://localhost:8000/api/providers/search?${params.toString()}`,
+      const response = await fetch(baseurl+
+        `/api/providers/search?${params.toString()}`,
         {
           method: "GET",
           headers: {
