@@ -1,10 +1,8 @@
-# 💖 Powerpuff 🌍  
-*A safe and empowering space by women, for women.*
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/haianhng31/Powerpuff-girls/main/frontend/src/Images/powerpuffLogo.png" width="150" alt="Powerpuff Logo" />
 </p>
 
+*A safe and empowering space by women, for women.*
 ---
 
 ## 🌟 About Powerpuff
